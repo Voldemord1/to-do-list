@@ -56,7 +56,7 @@ public class TaskController {
 
     @PostMapping("/create")
     public String newTask(Model model, @ModelAttribute Task task) {
-        if (!task.getTitle().isEmpty()) {
+        if (!task.getTitle().isEmpty() && task.getTitle().length() < 51) {
             taskService.addTask(task);
             return "redirect:/admin/all_tasks";
         } else {
