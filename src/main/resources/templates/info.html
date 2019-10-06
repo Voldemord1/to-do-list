@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Info task</title>
+</head>
+<body>
+<div align="center">
+    <h3>Info task</h3>
+    <form action="#" th:action="@{/admin/info}" th:object="${task}" method="post">
+        <p> ID: <br><input type="text" th:field="*{id}" size="24" readonly/></p>
+        <p> Title: <br><input type="text" th:field="*{title}" maxlength="50" size="24" readonly/></p>
+        <p> Date: <br><input type="text" th:field="*{date}" maxlength="50" size="24" readonly/></p>
+        <p> Information: <br><textarea th:field="*{information}" rows="4" cols="25"></textarea></p>
+        <p> Status: <input type="checkbox" th:field="*{status}"/></p>
+        <p th:if="${error}" class="error">Task not exist!</p>
+        <p>
+            <input type="button" class="inline" value="Back" onClick='location.href="/admin/all_tasks"'>
+            <input type="submit" class="inline" value="Save">
+            <input type="button" class="inline" value="Exit" onClick='location.href="/exit"'>
+        </p>
+    </form>
+</div>
+</body>
+</html>

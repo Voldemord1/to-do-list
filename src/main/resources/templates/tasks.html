@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Tasks list</title>
+</head>
+<body>
+<div align="center">
+    <form action="/admin/all_tasks" method="get">
+        <table border="1">
+            <caption>Tasks list</caption>
+            <thead>
+            <tr>
+                <th>Title</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="task : ${allTasks}">
+                <td><a th:href="@{/admin/info(id=${task.id})}" th:text="${task.title}"> Title </a></td>
+                <td><span th:text="${task.date}"> Date </span></td>
+                <td>
+                    <label>
+                        <input type="checkbox" th:checked="${task.status}" disabled/>
+                    </label>
+                </td>
+                <td>
+                    <a th:href="@{/admin/delete(id=${task.id})}" onclick="return dialogFunction();">Delete</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+    <p>
+        <input type="button" class="inline" value="New Task" onClick='location.href="/admin/create"'>
+        <input type="button" class="inline" value="Filter by Status" onClick='location.href="/admin/all_tasks/filter"'>
+        <input type="button" class="inline" value="Filter Off" onClick='location.href="/admin/all_tasks"'>
+        <input type="button" class="inline" value="Exit" onClick='location.href="/exit"'>
+    </p>
+</div>
+</body>
+
+<script>
+    function dialogFunction() {
+        return confirm("Would you like to delete this task?");
+    }
+</script>
+</html>
